@@ -9,3 +9,18 @@ before_install:
 
 script:
   - docker run -e CI=true singson01/app npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "app"
+  env: "App-env"
+  bucket_name: "elasticbeanstalk-us-east-2-028069378926"
+  bucket_path: "app"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
+
+  http://app-env.eba-cmyt2prp.us-east-2.elasticbeanstalk.com/
